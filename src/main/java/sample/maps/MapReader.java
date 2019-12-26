@@ -22,21 +22,21 @@ public class MapReader {
                 {
                     case 0:
                     {
-                        Title title = new Title(new Image("/sprites/environment/floor.png"), TypeOfTitle.FLOOR);
+                        Title title = new Title(new Image("/sprites/environment/floor.png"), TypeOfTitle.FLOOR,i,j);
                         mapGridPane.add(title.getRectangle(),i,j);
                         titles.add(title);
                         break;
                     }
                     case 1:
                     {
-                        Title title = new Title(new Image("/sprites/environment/brick.png"),TypeOfTitle.BRICK);
+                        Title title = new Title(new Image("/sprites/environment/brick.png"),TypeOfTitle.BRICK,i,j);
                         mapGridPane.add(title.getRectangle(),i,j);
                         titles.add(title);
                         break;
                     }
                     case 2:
                     {
-                        Title title = new Title(new Image("/sprites/environment/wall.png"),TypeOfTitle.WALL);
+                        Title title = new Title(new Image("/sprites/environment/wall.png"),TypeOfTitle.WALL,i,j);
                         mapGridPane.add(title.getRectangle(),i,j);
                         titles.add(title);
                         break;

@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
+import sample.main.Main;
+import sample.main.Menu;
 import sample.maps.MapObserver;
 import sample.player.Direction;
 import sample.player.Player;
@@ -52,6 +54,9 @@ public class Game implements Initializable  {
                 case RIGHT:
                     player1.setDirection(Direction.RIGHT);
                     break;
+                case SPACE:
+                    player1.plantBomb(map);
+                    break;
             }
         });
         boardGridPane.setOnKeyReleased(event -> {
@@ -98,6 +103,13 @@ public class Game implements Initializable  {
     public static Player getPlayer1() {
         return player1;
     }
+
+    public static void endGame()
+    {
+        System.out.println("Koniec GRY!");
+        Menu.getActualStage().close();
+    }
+
 
     private void startGame(){
         System.out.println("START W GAME");

@@ -1,67 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/BomberMan/META-INF/BomberMan.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/BomberMan-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BomberMan.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BomberMan.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="poprawki">
+      <change afterPath="$PROJECT_DIR$/src/main/java/sample/bomb/Bomb.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/bomb/bomb_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/bomb/bomb_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/bomb/bomb_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/environment/brick_destroyed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/explosion.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level1/image_part_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level1/image_part_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level1/image_part_003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level1/image_part_004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level1/image_part_005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level1/image_part_006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level1/image_part_007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level2/image_part_008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level2/image_part_009.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level2/image_part_010.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level2/image_part_011.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level2/image_part_012.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level2/image_part_013.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level2/image_part_014.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level3/image_part_015.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level3/image_part_016.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level3/image_part_017.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level3/image_part_018.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level3/image_part_019.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level3/image_part_020.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level3/image_part_021.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level4/image_part_022.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level4/image_part_023.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level4/image_part_024.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level4/image_part_025.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level4/image_part_026.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level4/image_part_027.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/explosion/level4/image_part_028.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/mainSprite/14bomberman.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/main/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/main/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/main/MenuObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/main/MenuObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/maps/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/maps/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/maps/MapReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/maps/MapReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/maps/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/maps/Title.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/maps/TypeOfTitle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/maps/TypeOfTitle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/maps/map1.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/maps/map1.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/sample/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_004.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_005.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_006.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_007.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_008.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_009.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_010.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_011.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_012.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_013.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_014.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_015.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprites/character1/image_part_016.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/sample/game/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/game/Game$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/sample/game/Game$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/game/Game$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/sample/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/game/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sample/maps/MapObserver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/maps/MapObserver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sample/main/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/main/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sample/maps/Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/maps/Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sample/maps/MapReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/maps/MapReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sample/maps/Title.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/maps/Title.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sample/maps/TypeOfTitle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/maps/TypeOfTitle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/sample/player/Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/player/Player$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/sample/player/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/player/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_001.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_002.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_003.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_004.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_005.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_006.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_007.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_008.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_009.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_010.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_011.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_012.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_013.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_014.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_015.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprites/character1/image_part_016.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="241" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -107,6 +110,13 @@
   <component name="FavoritesManager">
     <favorites_list name="JavaFxApplication" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindManager">
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
@@ -124,6 +134,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectId" id="1UZqqOtEFamjCxpVoIfzwPguc2X" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
@@ -143,7 +154,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/sprites/explosion" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -151,9 +162,15 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kubaw\Desktop\WAT\PZ\BomberMan\src\main\resources\sprites\explosion" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kubaw\Desktop\WAT\PZ\BomberMan\src\main\resources" />
-      <recent name="C:\Users\kubaw\Desktop\WAT\PZ\BomberMan\src\main\java\sample" />
+      <recent name="C:\Users\kubaw\Desktop\WAT\PZ\BomberMan\src\main\resources\sprites\environment" />
+      <recent name="C:\Users\kubaw\Desktop\WAT\PZ\BomberMan\src\main\resources\sprites\explosion\level4" />
+      <recent name="C:\Users\kubaw\Desktop\WAT\PZ\BomberMan\src\main\resources\sprites\explosion\level3" />
+      <recent name="C:\Users\kubaw\Desktop\WAT\PZ\BomberMan\src\main\resources\sprites\explosion\level2" />
+      <recent name="C:\Users\kubaw\Desktop\WAT\PZ\BomberMan\src\main\resources\sprites\explosion\level1" />
     </key>
   </component>
   <component name="RunManager">
@@ -261,7 +278,23 @@
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1575574659331" duration="2033000" />
       <workItem from="1575577001498" duration="10000" />
+      <workItem from="1575577060563" duration="265000" />
+      <workItem from="1575579747314" duration="9000" />
+      <workItem from="1575644183256" duration="256000" />
+      <workItem from="1575644812725" duration="106000" />
+      <workItem from="1575968268369" duration="213000" />
+      <workItem from="1575968509383" duration="16000" />
+      <workItem from="1577127042819" duration="1103000" />
+      <workItem from="1577369521418" duration="10732000" />
     </task>
+    <task id="LOCAL-00001" summary="poprawki">
+      <created>1575577131832</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1575577131832</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,52 +303,92 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <MESSAGE value="poprawki" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawki" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575575412627">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1575575412627" />
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser" timestamp="1577391663011">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577391663011" />
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1577385519300" />
     <state x="400" y="101" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1575575316663">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="400" y="101" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1575575316663" />
-    <state x="583" y="114" key="CommitChangelistDialog2" timestamp="1575577105747">
+    <state x="583" y="114" key="CommitChangelistDialog2" timestamp="1575577131067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="583" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1575577105747" />
+    <state x="583" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1575577131067" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1575574841340">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1575574841340" />
-    <state width="1877" height="210" key="GridCell.Tab.0.bottom" timestamp="1575576703094">
+    <state width="1877" height="401" key="GridCell.Tab.0.bottom" timestamp="1577392466824">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1575575656468" />
-    <state width="1877" height="210" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1575576703094" />
-    <state width="1877" height="210" key="GridCell.Tab.0.center" timestamp="1575576703094">
+    <state width="1877" height="401" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577392466824" />
+    <state width="1877" height="401" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1577388945075" />
+    <state width="1877" height="401" key="GridCell.Tab.0.center" timestamp="1577392466824">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1575575656467" />
-    <state width="1877" height="210" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1575576703094" />
-    <state width="1877" height="210" key="GridCell.Tab.0.left" timestamp="1575576703094">
+    <state width="1877" height="401" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577392466824" />
+    <state width="1877" height="401" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1577388945075" />
+    <state width="1877" height="401" key="GridCell.Tab.0.left" timestamp="1577392466824">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1575575656467" />
-    <state width="1877" height="210" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1575576703094" />
-    <state width="1877" height="210" key="GridCell.Tab.0.right" timestamp="1575576703094">
+    <state width="1877" height="401" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577392466824" />
+    <state width="1877" height="401" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1577388945075" />
+    <state width="1877" height="401" key="GridCell.Tab.0.right" timestamp="1577392466824">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1575575656467" />
-    <state width="1877" height="210" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1575576703094" />
+    <state width="1877" height="401" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577392466824" />
+    <state width="1877" height="401" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1577388945075" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1577390450904">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577390450904" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1577371924150" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1577390450904">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577390450904" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1577371924149" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1577390450904">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577390450904" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1577371924149" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1577390450904">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1577390450904" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1577371924149" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1575575485453">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1575575485453" />
-    <state x="581" y="298" key="com.intellij.ide.util.TipDialog" timestamp="1575577059775">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1575577166372">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1575577166372" />
+    <state x="581" y="298" key="com.intellij.ide.util.TipDialog" timestamp="1577369520678">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1575574659034" />
-    <state x="581" y="298" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1575577059775" />
+    <state x="581" y="298" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577369520678" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/BomberMan$Main.ic" NAME="Main Coverage Results" MODIFIED="1577390127192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>sample.*</FILTER>
+    </SUITE>
   </component>
 </project>

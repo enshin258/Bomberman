@@ -5,10 +5,13 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import sample.bomb.Bomb;
 import sample.game.Game;
 import sample.interfaces.Observable;
 import sample.interfaces.Observer;
+import sample.main.Main;
 import sample.maps.Map;
 import sample.maps.Title;
 import sample.maps.TypeOfTitle;
@@ -26,12 +29,14 @@ public class Player implements Observable {
     private TypeOfPlayer typeOfPlayer;
 
     private ImageView imageView;
+    private Rectangle hitbox;
     private List<Image> images;
 
 
     private double speed;
     private double power;
     private double maxBombs;
+    private int lives;
 
 
     private Direction direction;
@@ -43,18 +48,28 @@ public class Player implements Observable {
 
         this.images = images;
         this.imageView = new ImageView(images.get(1));
-        this.imageView.setFitHeight(40);
-        this.imageView.setFitWidth(40);
+        this.imageView.setFitHeight(50);
+        this.imageView.setFitWidth(50);
+        this.hitbox = new Rectangle(25,25);
+        this.hitbox.setTranslateX(7.5);
+        this.hitbox.setTranslateY(7.5);
+        this.hitbox.setOpacity(0.0);
         imageView.setFocusTraversable(true);
+
 
         this.frame_counter=1;
 
-        this.speed=2.5;
+        this.speed=2;
         this.power=2;
         this.maxBombs=1;
+        this.lives=3;
     }
 
-    public void move(double dx,double dy)
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+
+    public void move(double dx, double dy)
     {
         frame_counter+=0.08;
         if(frame_counter>12)
@@ -65,10 +80,18 @@ public class Player implements Observable {
         double newX = this.imageView.getTranslateX()+ dx;
         double newY = this.imageView.getTranslateY()+ dy;
 
+//        System.out.println("X2: " + this.imageView.getBoundsInParent().getMaxX());
+//        System.out.println("Y2: " + this.imageView.getBoundsInParent().getMaxY());
+
+
 
 
         this.imageView.setTranslateX(newX);
         this.imageView.setTranslateY(newY);
+
+        this.hitbox.setTranslateX(this.hitbox.getTranslateX()+ dx);
+        this.hitbox.setTranslateY(this.hitbox.getTranslateY()+ dy);
+
         if(checkCollisions())
         {
             switch (this.direction)
@@ -76,15 +99,19 @@ public class Player implements Observable {
 
                 case UP:
                     this.imageView.setTranslateY(this.imageView.getTranslateY()+5);
+                    this.hitbox.setTranslateY(this.hitbox.getTranslateY()+5);
                     break;
                 case DOWN:
                     this.imageView.setTranslateY(this.imageView.getTranslateY()-5);
+                    this.hitbox.setTranslateY(this.hitbox.getTranslateY()-5);
                     break;
                 case LEFT:
                     this.imageView.setTranslateX(this.imageView.getTranslateX()+5);
+                    this.hitbox.setTranslateX(this.hitbox.getTranslateX()+5);
                     break;
                 case RIGHT:
                     this.imageView.setTranslateX(this.imageView.getTranslateX()-5);
+                    this.hitbox.setTranslateX(this.hitbox.getTranslateX()-5);
                     break;
                 case STANDING:
                     break;
@@ -114,16 +141,40 @@ public class Player implements Observable {
     private boolean checkCollisions() {
         for(Title t:Game.getMap().getTitles())
         {
-            if(this.imageView.getBoundsInParent().intersects(t.getRectangle().getBoundsInParent()))
+            if(this.hitbox.getBoundsInParent().intersects(t.getRectangle().getBoundsInParent()))
             {
                 if(t.getTypeOfTitle()!=TypeOfTitle.FLOOR)
                 {
+                    if(t.getTypeOfTitle()==TypeOfTitle.FIRE)
+                    {
+                        loseHealth();
+                    }
                     return true;
                 }
+
             }
         }
         return false;
     }
+    public void loseHealth()
+    {
+        this.lives--;
+        if(this.lives<=0)
+        {
+            Game.endGame();
+        }
+    }
+
+
+    public void plantBomb(Map map)
+    {
+        Bomb bomb = new Bomb(new Image("/sprites/bomb/bomb_1.png"),(int)this.hitbox.getBoundsInParent().getMaxX()/50,(int)this.hitbox.getBoundsInParent().getMaxY()/50);
+
+        map.addBombToMap(bomb,(bomb.getX()),(bomb.getY()));
+        bomb.detonate(map);
+
+    }
+
 
     public int getCharacterID() {
         return characterID;

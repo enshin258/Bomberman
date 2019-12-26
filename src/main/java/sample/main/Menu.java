@@ -38,11 +38,14 @@ public class Menu implements Initializable, Observable {
             userClickedButton();
         });
         optionsButton.setOnAction(actionEvent -> {
+            actualStage = (Stage)optionsButton.getScene().getWindow();
+
             clickedButton = TypeOfButton.OPTIONS;
             userClickedButton();
 
         });
         exitButton.setOnAction(actionEvent -> {
+            actualStage = (Stage)exitButton.getScene().getWindow();
             clickedButton = TypeOfButton.EXIT;
             userClickedButton();
         });

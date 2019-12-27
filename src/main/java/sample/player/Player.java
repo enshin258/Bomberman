@@ -16,9 +16,7 @@ import sample.maps.Map;
 import sample.maps.Title;
 import sample.maps.TypeOfTitle;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Player implements Observable {
 
@@ -31,6 +29,7 @@ public class Player implements Observable {
     private ImageView imageView;
     private Rectangle hitbox;
     private List<Image> images;
+    public boolean invicible=false;
 
 
     private double speed;
@@ -143,12 +142,8 @@ public class Player implements Observable {
         {
             if(this.hitbox.getBoundsInParent().intersects(t.getRectangle().getBoundsInParent()))
             {
-                if(t.getTypeOfTitle()!=TypeOfTitle.FLOOR)
+                if(t.getTypeOfTitle()!=TypeOfTitle.FLOOR && t.getTypeOfTitle()!=TypeOfTitle.FIRE)
                 {
-                    if(t.getTypeOfTitle()==TypeOfTitle.FIRE)
-                    {
-                        loseHealth();
-                    }
                     return true;
                 }
 
@@ -158,7 +153,29 @@ public class Player implements Observable {
     }
     public void loseHealth()
     {
-        this.lives--;
+        for(Title t:Game.getMap().getTitles())
+        {
+            if(this.hitbox.getBoundsInParent().intersects(t.getRectangle().getBoundsInParent()))
+            {
+                if(t.getTypeOfTitle()==TypeOfTitle.FIRE && !this.invicible)
+                {
+                    this.lives--;
+                    this.invicible=true;
+                    System.out.println("STRACONO ZYCIE, POZOSTALO: " + this.lives);
+                    System.out.println("NIESMIERTELNY");
+
+                    Timer myTimer = new Timer();
+                    myTimer.schedule(new TimerTask(){
+                        @Override
+                        public void run() {
+                            invicible=false;
+                            System.out.println("Znowu smiertelny");
+                        }
+                    }, 2000);
+                    break;
+                }
+            }
+        }
         if(this.lives<=0)
         {
             Game.endGame();

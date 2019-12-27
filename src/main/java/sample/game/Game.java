@@ -107,7 +107,7 @@ public class Game implements Initializable  {
     public static void endGame()
     {
         System.out.println("Koniec GRY!");
-        Menu.getActualStage().close();
+        //Menu.getActualStage().close();
     }
 
 
@@ -116,6 +116,7 @@ public class Game implements Initializable  {
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                player1.loseHealth();
                 if(player1.getDirection()!=Direction.STANDING)
                 {
                     map.notifyObservers();

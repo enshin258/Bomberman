@@ -31,6 +31,10 @@ public class Title{
         return typeOfTitle;
     }
 
+    public void setTypeOfTitle(TypeOfTitle typeOfTitle) {
+        this.typeOfTitle = typeOfTitle;
+    }
+
     public int getX() {
         return x;
     }

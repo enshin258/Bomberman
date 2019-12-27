@@ -12,11 +12,15 @@ import sample.maps.Map;
 import sample.maps.Title;
 import sample.maps.TypeOfTitle;
 
+import java.util.Iterator;
+import java.util.Vector;
+
 public class Bomb {
     Rectangle rectangle;
     Image sprite;
     int x;
     int y;
+    public Vector<Title> lastFires = new Vector<>();
 
     public Bomb(Image sprite,int x,int y) {
         this.rectangle = new Rectangle(40,40);
@@ -25,7 +29,7 @@ public class Bomb {
         this.x=x;
         this.y=y;
     }
-    public void detonate(Map map)
+    synchronized public void detonate(Map map)
     {
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().add(new KeyFrame(
@@ -51,29 +55,62 @@ public class Bomb {
                 Duration.millis(1600),
                 event ->
                 {
+                    resetFire(map);
                     explosionLevel(map,2);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(1700),
                 event ->
                 {
+                    resetFire(map);
+
                     explosionLevel(map,3);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
-                Duration.millis(1800),
+            Duration.millis(1800),
+            event ->
+            {
+                resetFire(map);
+
+                explosionLevel(map,4);
+            }));
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.millis(1900),
                 event ->
                 {
-                    explosionLevel(map,4);
+                    resetFire(map);
+
+                    explosionLevel(map,3);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(2000),
                 event ->
                 {
+                    resetFire(map);
 
+                    explosionLevel(map,2);
+                }));
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.millis(2100),
+                event ->
+                {
+                    resetFire(map);
+
+                    explosionLevel(map,1);
+                }));
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.millis(2200),
+                event ->
+                {
+                    resetFire(map);
+
+                    timeline.stop();
                 }));
 
 
         timeline.playFromStart();
+
+
     }
     public void explosionLevel(Map map,int level)
     {
@@ -81,259 +118,141 @@ public class Bomb {
         {
             case 1:
             {
-                //middle
-                Title fire = new Title(new Image("/sprites/explosion/level1/image_part_001.png"),TypeOfTitle.FIRE,this.x,this.y);
-                map.addFireToMap(fire,this.x,this.y);
-                //up
-                if(this.y-1>=1)
-                {
-                    if(checkNextTitle(x,y-1,map))
-                    {
-                        fire = new Title(new Image("/sprites/explosion/level1/image_part_002.png"),TypeOfTitle.FIRE,this.x,this.y-1);
-                        map.addFireToMap(fire,this.x,this.y-1);
-                    }
-                }
+                addFire(map,"1");
+                break;
+            }
+            case 2:
+            {
+                addFire(map,"2");
+                break;
+            }
+            case 3:
+            {
+                addFire(map,"3");
+                break;
+            }
+            case 4:
+            {
+                addFire(map,"4");
+
+                break;
+            }
+        }
+    }
+    public void addFire(Map map,String level)
+    {
+
+        String path = "/sprites/explosion/level" + level + "/center_fire.png";
+        Title fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x,this.y);
+        map.addFireToMap(fire,this.x,this.y);
+        this.lastFires.add(fire);
+        //check up
+        //up
+        if(this.y-1>=1)
+        {
+            if(checkIfNextTitleIsFlammable(x,y-1,map))
+            {
+                path = "/sprites/explosion/level" + level + "/vertical_fire.png";
+                fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x,this.y-1);
+                map.addFireToMap(fire,this.x,this.y-1);
+                this.lastFires.add(fire);
+
                 //up up
                 if(this.y-2>=1)
                 {
-                    if(checkNextTitle(x,y-2,map))
+                    if(checkIfNextTitleIsFlammable(x,y-2,map))
                     {
-                        fire = new Title(new Image("/sprites/explosion/level1/image_part_004.png"),TypeOfTitle.FIRE,this.x,this.y-2);
+                        path = "/sprites/explosion/level" + level + "/up_fire.png";
+                        fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x,this.y-2);
                         map.addFireToMap(fire,this.x,this.y-2);
+                        this.lastFires.add(fire);
+
                     }
                 }
-                //left
-                if(this.x-1>=1)
-                {
-                    if(checkNextTitle(x-1,y,map))
-                    {
-                        fire = new Title(new Image("/sprites/explosion/level1/image_part_003.png"),TypeOfTitle.FIRE,this.x-1,this.y);
-                        map.addFireToMap(fire,this.x-1,this.y);
-                    }
-                }
+            }
+        }
+
+        //left
+        if(this.x-1>=1)
+        {
+            if(checkIfNextTitleIsFlammable(x-1,y,map))
+            {
+                path = "/sprites/explosion/level" + level + "/horizontal_fire.png";
+                fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x-1,this.y);
+                map.addFireToMap(fire,this.x-1,this.y);
+
+                this.lastFires.add(fire);
+
                 //left left
                 if(this.x-2>=1)
                 {
-                    if(checkNextTitle(x-2,y,map))
+                    if(checkIfNextTitleIsFlammable(x-2,y,map))
                     {
-                        fire = new Title(new Image("/sprites/explosion/level1/image_part_007.png"),TypeOfTitle.FIRE,this.x-2,this.y);
+                        path = "/sprites/explosion/level" + level + "/left_fire.png";
+                        fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x-2,this.y);
                         map.addFireToMap(fire,this.x-2,this.y);
-                    }
-                }
-                //right
-                if(this.x+1<=16)
-                {
-                    if(checkNextTitle(x+1,y,map))
-                    {
-                        fire = new Title(new Image("/sprites/explosion/level1/image_part_003.png"),TypeOfTitle.FIRE,this.x+1,this.y);
-                        map.addFireToMap(fire,this.x+1,this.y);
-                    }
+                        this.lastFires.add(fire);
 
+                    }
                 }
+            }
+        }
+
+        //right
+        if(this.x+1<=16)
+        {
+            if(checkIfNextTitleIsFlammable(x+1,y,map))
+            {
+                path = "/sprites/explosion/level" + level + "/horizontal_fire.png";
+                fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x+1,this.y);
+                map.addFireToMap(fire,this.x+1,this.y);
+                this.lastFires.add(fire);
+
                 //right right
                 if(this.x+2<=16)
                 {
-                    if(checkNextTitle(x+2,y,map))
+                    if(checkIfNextTitleIsFlammable(x+2,y,map))
                     {
-                        fire = new Title(new Image("/sprites/explosion/level1/image_part_006.png"),TypeOfTitle.FIRE,this.x+2,this.y);
+                        path = "/sprites/explosion/level" + level + "/right_fire.png";
+                        fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x+2,this.y);
                         map.addFireToMap(fire,this.x+2,this.y);
+                        this.lastFires.add(fire);
+
                     }
 
                 }
-                //down
-                if(this.y+1<=16)
-                {
-                    if(checkNextTitle(x,y+1,map))
-                    {
-                        fire = new Title(new Image("/sprites/explosion/level1/image_part_002.png"),TypeOfTitle.FIRE,this.x,this.y+1);
-                        map.addFireToMap(fire,this.x,this.y+1);
-                    }
+            }
 
-                }
+        }
+
+        //down
+        if(this.y+1<=16)
+        {
+            if(checkIfNextTitleIsFlammable(x,y+1,map))
+            {
+                path = "/sprites/explosion/level" + level + "/vertical_fire.png";
+                fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x,this.y+1);
+                map.addFireToMap(fire,this.x,this.y+1);
+                this.lastFires.add(fire);
+
                 //down down
                 if(this.y+2<=16)
                 {
-                    if(checkNextTitle(x,y+2,map))
+                    if(checkIfNextTitleIsFlammable(x,y+2,map))
                     {
-                        fire = new Title(new Image("/sprites/explosion/level1/image_part_005.png"),TypeOfTitle.FIRE,this.x,this.y+2);
+                        path = "/sprites/explosion/level" + level + "/down_fire.png";
+                        fire = new Title(new Image(path),TypeOfTitle.FIRE,this.x,this.y+2);
                         map.addFireToMap(fire,this.x,this.y+2);
+                        this.lastFires.add(fire);
+
                     }
 
                 }
-                break;
             }
-//            case 2:
-//            {
-//                //middle
-//                Title fire = new Title(new Image("/sprites/explosion/level2/image_part_008.png"),TypeOfTitle.FIRE);
-//                map.addFireToMap(fire,this.x,this.y);
-//                //up
-//                if(this.y-1>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level2/image_part_009.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y-1);
-//                }
-//                //up up
-//                if(this.y-2>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level2/image_part_011.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y-2);
-//                }
-//                //left
-//                if(this.x-1>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level2/image_part_010.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x-1,this.y);
-//                }
-//                //left left
-//                if(this.x-2>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level2/image_part_014.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x-2,this.y);
-//                }
-//                //right
-//                if(this.x+1<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level2/image_part_010.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x+1,this.y);
-//                }
-//                //right right
-//                if(this.x+2<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level2/image_part_013.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x+2,this.y);
-//                }
-//                //down
-//                if(this.y+1<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level2/image_part_009.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y+1);
-//                }
-//                //down down
-//                if(this.y+2<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level2/image_part_012.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y+2);
-//                }
-//                break;
-//            }
-//            case 3:
-//            {
-//                //middle
-//                Title fire = new Title(new Image("/sprites/explosion/level3/image_part_015.png"),TypeOfTitle.FIRE);
-//                map.addFireToMap(fire,this.x,this.y);
-//                //up
-//                if(this.y-1>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level3/image_part_016.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y-1);
-//                }
-//                //up up
-//                if(this.y-2>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level3/image_part_018.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y-2);
-//                }
-//                //left
-//                if(this.x-1>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level3/image_part_017.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x-1,this.y);
-//                }
-//                //left left
-//                if(this.x-2>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level3/image_part_021.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x-2,this.y);
-//                }
-//                //right
-//                if(this.x+1<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level3/image_part_017.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x+1,this.y);
-//                }
-//                //right right
-//                if(this.x+2<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level3/image_part_020.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x+2,this.y);
-//                }
-//                //down
-//                if(this.y+1<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level3/image_part_016.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y+1);
-//                }
-//                //down down
-//                if(this.y+2<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level3/image_part_019.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y+2);
-//                }
-//                break;
-//            }
-//            case 4:
-//            {
-//                //middle
-//                Title fire = new Title(new Image("/sprites/explosion/level4/image_part_022.png"),TypeOfTitle.FIRE);
-//                map.addFireToMap(fire,this.x,this.y);
-//                //up
-//                if(this.y-1>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level4/image_part_023.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y-1);
-//                }
-//                //up up
-//                if(this.y-2>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level4/image_part_025.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y-2);
-//                }
-//                //left
-//                if(this.x-1>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level4/image_part_024.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x-1,this.y);
-//                }
-//                //left left
-//                if(this.x-2>=1)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level4/image_part_028.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x-2,this.y);
-//                }
-//                //right
-//                if(this.x+1<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level4/image_part_024.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x+1,this.y);
-//                }
-//                //right right
-//                if(this.x+2<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level4/image_part_027.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x+2,this.y);
-//                }
-//                //down
-//                if(this.y+1<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level4/image_part_023.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y+1);
-//                }
-//                //down down
-//                if(this.y+2<=16)
-//                {
-//                    fire = new Title(new Image("/sprites/explosion/level4/image_part_026.png"),TypeOfTitle.FIRE);
-//                    map.addFireToMap(fire,this.x,this.y+2);
-//                }
-//                break;
-//            }
         }
-
-
-
     }
-
-    public boolean checkNextTitle(int nextX,int nextY,Map map)
+    
+    public boolean checkIfNextTitleIsFlammable(int nextX,int nextY,Map map)
     {
         for (Title t:map.getTitles()) {
             if(t.getX()==nextX && t.getY()==nextY)
@@ -341,9 +260,10 @@ public class Bomb {
                 if(t.getTypeOfTitle()==TypeOfTitle.BRICK)
                 {
                     t.getRectangle().setFill(new ImagePattern(new Image("sprites/environment/brick_destroyed.png")));
+                    t.setTypeOfTitle(TypeOfTitle.FLOOR);
                     return true;
                 }
-                else if(t.getTypeOfTitle()!=TypeOfTitle.WALL && t.getTypeOfTitle()!=TypeOfTitle.FIRE)
+                else if(t.getTypeOfTitle()==TypeOfTitle.FLOOR)
                 {
                     return true;
                 }
@@ -352,14 +272,23 @@ public class Bomb {
                     return false;
                 }
             }
+
         }
         return true;
     }
 
-
-
-
-
+    public void resetFire(Map map)
+    {
+        for (Iterator<Title> iterator = map.getTitles().iterator(); iterator.hasNext();) {
+            Title t = iterator.next();
+            if (t.getTypeOfTitle()==TypeOfTitle.FIRE && lastFires.contains(t)  ) {
+                // Remove the current element from the iterator and the list.
+                iterator.remove();
+                map.getMapGridPane().getChildren().remove(t.getRectangle());
+            }
+        }
+        lastFires.clear();
+    }
 
     public Rectangle getRectangle() {
         return rectangle;

@@ -157,7 +157,7 @@ public class Player implements Observable {
         {
             if(this.hitbox.getBoundsInParent().intersects(t.getRectangle().getBoundsInParent()))
             {
-                if(t.getTypeOfTitle()==TypeOfTitle.FIRE && !this.invicible)
+                if(t.getTypeOfTitle()==TypeOfTitle.FIRE && !this.invicible && this.getLives()>0)
                 {
 
                     this.invicible=true;

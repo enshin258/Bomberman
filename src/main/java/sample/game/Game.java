@@ -8,70 +8,136 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import sample.main.Menu;
 import sample.maps.MapObserver;
+import sample.maps.Title;
+import sample.maps.TypeOfTitle;
 import sample.player.Direction;
 import sample.player.Player;
 import sample.maps.Map;
 import sample.player.TypeOfPlayer;
 
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Game implements Initializable  {
 
 
     @FXML
     GridPane boardGridPane;
-
     @FXML
     Text lives_counter_1;
-
     @FXML
     Text lives_counter_2;
+    @FXML
+    Text lives_counter_3;
+    @FXML
+    Text lives_counter_4;
 
     static private Map map;
-    static private Player player1;
-    static private Player player2;
+
+
+    static public Vector<Player> players = new Vector<>();
+    static public Vector<Text> counters = new Vector<>();
     MapObserver mapObserver = new MapObserver();
 
 
 
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+
+        counters.add(lives_counter_1);
+        counters.add(lives_counter_2);
+        counters.add(lives_counter_3);
+        counters.add(lives_counter_4);
+
         generateMap();
         addPlayers();
+
         boardGridPane.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case W:
-                    player1.setDirection(Direction.UP);
+                    players.get(0).setDirection(Direction.UP);
                     break;
                 case UP:
-                    player2.setDirection(Direction.UP);
+                    players.get(1).setDirection(Direction.UP);
                     break;
+                case NUMPAD8:
+                    players.get(2).setDirection(Direction.UP);
+                    break;
+                case I:
+                    players.get(3).setDirection(Direction.UP);
+                    break;
+
+
                 case S:
-                    player1.setDirection(Direction.DOWN);
+                    players.get(0).setDirection(Direction.DOWN);
                     break;
                 case DOWN:
-                    player2.setDirection(Direction.DOWN);
+                    players.get(1).setDirection(Direction.DOWN);
                     break;
+                case NUMPAD2:
+                    players.get(2).setDirection(Direction.DOWN);
+                    break;
+                case K:
+                    players.get(3).setDirection(Direction.DOWN);
+                    break;
+
+
+
                 case A:
-                    player1.setDirection(Direction.LEFT);
+                    players.get(0).setDirection(Direction.LEFT);
                     break;
                 case LEFT:
-                    player2.setDirection(Direction.LEFT);
+                    players.get(1).setDirection(Direction.LEFT);
                     break;
+                case NUMPAD4:
+                    players.get(2).setDirection(Direction.LEFT);
+                    break;
+                case J:
+                    players.get(3).setDirection(Direction.LEFT);
+                    break;
+
+
+
+
+
                 case D:
-                    player1.setDirection(Direction.RIGHT);
+                    players.get(0).setDirection(Direction.RIGHT);
                     break;
                 case RIGHT:
-                    player2.setDirection(Direction.RIGHT);
+                    players.get(1).setDirection(Direction.RIGHT);
                     break;
+                case NUMPAD6:
+                    players.get(2).setDirection(Direction.RIGHT);
+                    break;
+                case L:
+                    players.get(3).setDirection(Direction.RIGHT);
+                    break;
+
+
+
                 case SPACE:
-                    player1.plantBomb(map);
+                    if(players.get(0).getLives()>0)
+                    {
+                        players.get(0).plantBomb(map);
+                    }
                     break;
                 case SHIFT:
-                    player2.plantBomb(map);
+                    if(players.get(1).getLives()>0)
+                    {
+                        players.get(1).plantBomb(map);
+                    }
+                    break;
+                case NUMPAD5:
+                    if(players.get(2).getLives()>0)
+                    {
+                        players.get(2).plantBomb(map);
+                    }
+                    break;
+                case SEMICOLON:
+                    if(players.get(3).getLives()>0)
+                    {
+                        players.get(3).plantBomb(map);
+                    }
                     break;
             }
         });
@@ -81,18 +147,30 @@ public class Game implements Initializable  {
                 case A:
                 case S:
                 case D:
-                    player1.setDirection(Direction.STANDING);
+                    players.get(0).setDirection(Direction.STANDING);
                     break;
                 case UP:
                 case LEFT:
                 case DOWN:
                 case RIGHT:
-                    player2.setDirection(Direction.STANDING);
+                    players.get(1).setDirection(Direction.STANDING);
+                    break;
+                case NUMPAD8:
+                case NUMPAD4:
+                case NUMPAD2:
+                case NUMPAD6:
+                    players.get(2).setDirection(Direction.STANDING);
+                    break;
+                case I:
+                case J:
+                case K:
+                case L:
+                    players.get(3).setDirection(Direction.STANDING);
                     break;
             }
         });
 
-        System.out.println("INICJALIZACJA W GAME");
+        System.out.println("INICJALIZACJA GRY");
         startGame();
 
     }
@@ -105,83 +183,77 @@ public class Game implements Initializable  {
     }
     private void addPlayers()
     {
-        List<Image> imagesForPlayer1 = new LinkedList<>();
-        for(int i=1;i<=16;i++)
-        {
-            String nameOfFile="/sprites/character1/image_part_0";
-            if(i<10)
-            {
-                nameOfFile=nameOfFile+"0"+i+".png";
+        for(int k=0;k<4;k++) {
+            List<Image> imagesForPlayer = new LinkedList<>();
+            for (int i = 1; i <= 16; i++) {
+                String nameOfFile = "/sprites/character" + (k+1) + "/row-1-col-" + i + ".png";
+                System.out.println("SCIEZKA:" + nameOfFile);
+                imagesForPlayer.add(new Image(nameOfFile));
             }
-            else
-            {
-                nameOfFile=nameOfFile+i+".png";
+            switch (k) {
+                case 0: {
+                    Player player = new Player(k, TypeOfPlayer.HUMAN, imagesForPlayer);
+                    player.setDirection(Direction.STANDING);
+                    map.addPlayerToMap(player, 1, 1);
+                    players.add(player);
+                    break;
+                }
+                case 1: {
+                    Player player = new Player(k, TypeOfPlayer.HUMAN, imagesForPlayer);
+                    player.setDirection(Direction.STANDING);
+                    map.addPlayerToMap(player, 14, 14);
+                    players.add(player);
+                    break;
+
+                }
+                case 2: {
+                    Player player = new Player(k, TypeOfPlayer.HUMAN, imagesForPlayer);
+                    player.setDirection(Direction.STANDING);
+                    map.addPlayerToMap(player, 1, 14);
+                    players.add(player);
+                    break;
+
+                }
+                case 3: {
+                    Player player = new Player(k, TypeOfPlayer.HUMAN, imagesForPlayer);
+                    player.setDirection(Direction.STANDING);
+                    map.addPlayerToMap(player, 14, 1);
+                    players.add(player);
+                    break;
+                }
             }
-            imagesForPlayer1.add(new Image(nameOfFile));
         }
-
-        List<Image> imagesForPlayer2 = new LinkedList<>();
-        for(int i=1;i<=16;i++)
-        {
-            String nameOfFile="/sprites/character2/image_part_0";
-            if(i<10)
-            {
-                nameOfFile=nameOfFile+"0"+i+".png";
-            }
-            else
-            {
-                nameOfFile=nameOfFile+i+".png";
-            }
-            imagesForPlayer2.add(new Image(nameOfFile));
-        }
-
-        player1 = new Player(1, TypeOfPlayer.HUMAN,imagesForPlayer1);
-        player1.setDirection(Direction.STANDING);
-        map.addPlayerToMap(player1, 1, 1);
-
-        player2 = new Player(2, TypeOfPlayer.HUMAN,imagesForPlayer2);
-        player2.setDirection(Direction.STANDING);
-        map.addPlayerToMap(player2, 14, 14);
-
     }
 
     public static Map getMap() {
         return map;
     }
 
-    public static Player getPlayer1() {
-        return player1;
-    }
-    public static Player getPlayer2() {
-        return player2;
-    }
 
-    public void changeLivesCounterPlayer1()
+    public void changeLivesCounterPlayer(int idOfPlayer)
     {
-        player1.setLives(player1.getLives()-1);
-        lives_counter_1.setText(Integer.toString(player1.getLives()));
-        if(player1.getLives()<=0)
+        Player player = players.get(idOfPlayer);
+        player.setLives(player.getLives()-1);
+        counters.get(idOfPlayer).setText(Integer.toString(player.getLives()));
+        if(player.getLives()<=0)
         {
+
+            map.getMapGridPane().getChildren().remove(player.getImageView());
+            map.getMapGridPane().getChildren().remove(player.getHitbox());
+            System.out.println("GRACZ NUMER: " + player.getCharacterID() + "PRZEGRAł");
             endGame();
         }
 
     }
-    public void changeLivesCounterPlayer2()
-    {
-        player2.setLives(player2.getLives()-1);
-        lives_counter_2.setText(Integer.toString(player2.getLives()));
-        if(player2.getLives()<=0)
-        {
-            endGame();
-        }
 
-    }
 
 
     public static void endGame()
     {
-        System.out.println("Koniec GRY!");
-        Menu.getActualStage().close();
+
+        //System.out.println("Koniec GRY!");
+        //Menu.getActualStage().close();
+
     }
 
 
@@ -190,21 +262,15 @@ public class Game implements Initializable  {
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if(player1.loseHealth())
-                {
-                    changeLivesCounterPlayer1();
-                }
-                if(player1.getDirection()!=Direction.STANDING)
-                {
-                    map.notifyObservers();
-                }
-                if(player2.loseHealth())
-                {
-                    changeLivesCounterPlayer2();
-                }
-                if(player2.getDirection()!=Direction.STANDING)
-                {
-                    map.notifyObservers();
+                for (Player player:players) {
+                    if(player.loseHealth())
+                    {
+                        changeLivesCounterPlayer(player.getCharacterID());
+                    }
+                    if(player.getDirection()!=Direction.STANDING && player.getLives()>0)
+                    {
+                        map.notifyObservers(player.getCharacterID());
+                    }
                 }
             }
         };

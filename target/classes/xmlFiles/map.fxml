@@ -29,7 +29,17 @@
                   <Font name="Bauhaus 93" size="96.0" />
                </font>
             </Text>
-            <Text fx:id="lives_counter_2" layoutX="68.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+            <Text fx:id="lives_counter_2" layoutX="68.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+               <font>
+                  <Font name="Bauhaus 93" size="96.0" />
+               </font>
+            </Text>
+            <Text fx:id="lives_counter_3" layoutX="68.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+               <font>
+                  <Font name="Bauhaus 93" size="96.0" />
+               </font>
+            </Text>
+            <Text fx:id="lives_counter_4" layoutX="68.0" layoutY="753.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
                <font>
                   <Font name="Bauhaus 93" size="96.0" />
                </font>

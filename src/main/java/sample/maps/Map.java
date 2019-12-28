@@ -5,6 +5,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import sample.bomb.Bomb;
 import sample.interfaces.Observable;
 import sample.interfaces.Observer;
+import sample.main.MenuObserver;
 import sample.player.Player;
 
 import java.io.File;
@@ -18,7 +19,7 @@ public class Map implements Observable {
 
     private GridPane mapGridPane;
     private Vector<Title> titles = new Vector<>();
-    private Set<Observer> observerInterfaces = new HashSet<>();
+    private Set<MapObserver> observerInterfaces = new HashSet<>();
 
 
     public void loadMap(){
@@ -60,9 +61,13 @@ public class Map implements Observable {
         this.mapGridPane = mapGridPane;
     }
 
+    public void attach(MapObserver observerInterface) {
+        this.observerInterfaces.add(observerInterface);
+    }
+
     @Override
     public void attach(Observer observerInterface) {
-        this.observerInterfaces.add(observerInterface);
+
     }
 
     @Override
@@ -72,6 +77,12 @@ public class Map implements Observable {
 
     @Override
     public void notifyObservers() {
-        this.observerInterfaces.forEach(Observer::update);
+
+    }
+
+    public void notifyObservers(int playerID) {
+        for (MapObserver mapObserver:this.observerInterfaces) {
+            mapObserver.update(playerID);
+        }
     }
 }

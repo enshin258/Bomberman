@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
+import sample.main.Menu;
 import sample.maps.MapObserver;
 import sample.player.Direction;
 import sample.player.Player;
@@ -179,7 +180,7 @@ public class Game implements Initializable  {
     }
     private void addPlayers()
     {
-        for(int k=0;k<4;k++) {
+        for(int k = 0; k<Menu.getNumberOfPlayers(); k++) {
             List<Image> imagesForPlayer = new LinkedList<>();
             for (int i = 1; i <= 16; i++) {
                 String nameOfFile = "/sprites/character" + (k+1) + "/row-1-col-" + i + ".png";
@@ -191,6 +192,7 @@ public class Game implements Initializable  {
                     player.setDirection(Direction.STANDING);
                     map.addPlayerToMap(player, 1, 1);
                     players.add(player);
+                    counters.get(0).setText(player.getLives()+"");
                     break;
                 }
                 case 1: {
@@ -198,6 +200,7 @@ public class Game implements Initializable  {
                     player.setDirection(Direction.STANDING);
                     map.addPlayerToMap(player, 14, 14);
                     players.add(player);
+                    counters.get(1).setText(player.getLives()+"");
                     break;
 
                 }
@@ -206,6 +209,7 @@ public class Game implements Initializable  {
                     player.setDirection(Direction.STANDING);
                     map.addPlayerToMap(player, 1, 14);
                     players.add(player);
+                    counters.get(2).setText(player.getLives()+"");
                     break;
 
                 }
@@ -214,6 +218,7 @@ public class Game implements Initializable  {
                     player.setDirection(Direction.STANDING);
                     map.addPlayerToMap(player, 14, 1);
                     players.add(player);
+                    counters.get(3).setText(player.getLives()+"");
                     break;
                 }
             }

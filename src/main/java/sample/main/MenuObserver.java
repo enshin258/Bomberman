@@ -21,8 +21,6 @@ public class MenuObserver implements Observer {
                     e.printStackTrace();
                 }
                 break;
-            case OPTIONS:
-                break;
             case EXIT:
                 Menu.getActualStage().close();
                 break;

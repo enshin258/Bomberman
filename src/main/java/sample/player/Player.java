@@ -53,7 +53,7 @@ public class Player implements Observable {
         this.hitbox.setTranslateX(7.5);
         this.hitbox.setTranslateY(7.5);
         this.hitbox.setOpacity(0.0);
-        imageView.setFocusTraversable(true);
+        this.imageView.setFocusTraversable(true);
 
 
         this.frame_counter=1;
@@ -70,10 +70,10 @@ public class Player implements Observable {
 
     public void move(double dx, double dy)
     {
-        frame_counter+=0.08;
-        if(frame_counter>12)
+        this.frame_counter+=0.08;
+        if(this.frame_counter>12)
         {
-            frame_counter=1;
+            this.frame_counter=1;
         }
 
         double newX = this.imageView.getTranslateX()+ dx;
@@ -151,7 +151,7 @@ public class Player implements Observable {
         }
         return false;
     }
-    public void loseHealth()
+    public boolean loseHealth()
     {
         for(Title t:Game.getMap().getTitles())
         {
@@ -159,27 +159,26 @@ public class Player implements Observable {
             {
                 if(t.getTypeOfTitle()==TypeOfTitle.FIRE && !this.invicible)
                 {
-                    this.lives--;
+
                     this.invicible=true;
+                    this.imageView.setOpacity(0.5f);
                     System.out.println("STRACONO ZYCIE, POZOSTALO: " + this.lives);
-                    System.out.println("NIESMIERTELNY");
+                    System.out.println("GRACZ: " + this.characterID + "JEST NIESMIERTELNY");
 
                     Timer myTimer = new Timer();
                     myTimer.schedule(new TimerTask(){
                         @Override
                         public void run() {
                             invicible=false;
-                            System.out.println("Znowu smiertelny");
+                            imageView.setOpacity(1f);
+                            System.out.println("Gracz: " + characterID + " Znowu smiertelny");
                         }
-                    }, 2000);
-                    break;
+                    }, 1000);
+                    return true;
                 }
             }
         }
-        if(this.lives<=0)
-        {
-            Game.endGame();
-        }
+        return false;
     }
 
 
@@ -255,6 +254,14 @@ public class Player implements Observable {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public Set<Observer> getObserverInterfaces() {

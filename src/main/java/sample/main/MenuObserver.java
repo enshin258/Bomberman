@@ -16,7 +16,7 @@ public class MenuObserver implements Observer {
             case NEW_GAME:
                 try {
                     Parent root = FXMLLoader.load(getClass().getResource("/xmlFiles/map.fxml"));
-                    Menu.getActualStage().setScene(new Scene(root, 800,800));
+                    Menu.getActualStage().setScene(new Scene(root, 1000,800));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

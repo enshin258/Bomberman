@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import sample.game.Game;
 import sample.maps.Map;
 import sample.maps.Title;
 import sample.maps.TypeOfTitle;
@@ -20,14 +21,16 @@ public class Bomb {
     Image sprite;
     int x;
     int y;
+    int idOfPlayerWhoPlantedBomb;
     public Vector<Title> lastFires = new Vector<>();
 
-    public Bomb(Image sprite,int x,int y) {
+    public Bomb(Image sprite,int x,int y,int idOfPlayerWhoPlantedBomb) {
         this.rectangle = new Rectangle(40,40);
         this.sprite = sprite;
         this.rectangle.setFill(new ImagePattern(sprite));
         this.x=x;
         this.y=y;
+        this.idOfPlayerWhoPlantedBomb = idOfPlayerWhoPlantedBomb;
     }
     synchronized public void detonate(Map map)
     {
@@ -48,6 +51,7 @@ public class Bomb {
                 Duration.millis(1500),
                 event ->
                 {
+                    Game.getMap().getBombs().remove(this);
                     map.getMapGridPane().getChildren().remove(this.rectangle);
                     explosionLevel(map,1);
                 }));
@@ -320,5 +324,13 @@ public class Bomb {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getIdOfPlayerWhoPlantedBomb() {
+        return idOfPlayerWhoPlantedBomb;
+    }
+
+    public void setIdOfPlayerWhoPlantedBomb(int idOfPlayerWhoPlantedBomb) {
+        this.idOfPlayerWhoPlantedBomb = idOfPlayerWhoPlantedBomb;
     }
 }

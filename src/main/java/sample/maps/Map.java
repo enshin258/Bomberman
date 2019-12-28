@@ -19,6 +19,7 @@ public class Map implements Observable {
 
     private GridPane mapGridPane;
     private Vector<Title> titles = new Vector<>();
+    private Vector<Bomb> bombs = new Vector<>();
     private Set<MapObserver> observerInterfaces = new HashSet<>();
 
 
@@ -39,6 +40,7 @@ public class Map implements Observable {
     public void addBombToMap(Bomb bomb, int x, int y)
     {
         this.mapGridPane.add(bomb.getRectangle(),x,y);
+        this.bombs.add(bomb);
 
     }
     public void addFireToMap(Title fire,int x,int y)
@@ -59,6 +61,10 @@ public class Map implements Observable {
 
     public void setMapGridPane(GridPane mapGridPane) {
         this.mapGridPane = mapGridPane;
+    }
+
+    public Vector<Bomb> getBombs() {
+        return bombs;
     }
 
     public void attach(MapObserver observerInterface) {

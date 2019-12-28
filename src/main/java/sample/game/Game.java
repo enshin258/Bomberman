@@ -6,14 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
-import sample.main.Menu;
 import sample.maps.MapObserver;
-import sample.maps.Title;
-import sample.maps.TypeOfTitle;
 import sample.player.Direction;
 import sample.player.Player;
 import sample.maps.Map;
-import sample.player.TypeOfPlayer;
 
 import java.net.URL;
 import java.util.*;
@@ -187,19 +183,18 @@ public class Game implements Initializable  {
             List<Image> imagesForPlayer = new LinkedList<>();
             for (int i = 1; i <= 16; i++) {
                 String nameOfFile = "/sprites/character" + (k+1) + "/row-1-col-" + i + ".png";
-                System.out.println("SCIEZKA:" + nameOfFile);
                 imagesForPlayer.add(new Image(nameOfFile));
             }
             switch (k) {
                 case 0: {
-                    Player player = new Player(k, TypeOfPlayer.HUMAN, imagesForPlayer);
+                    Player player = new Player(k, imagesForPlayer);
                     player.setDirection(Direction.STANDING);
                     map.addPlayerToMap(player, 1, 1);
                     players.add(player);
                     break;
                 }
                 case 1: {
-                    Player player = new Player(k, TypeOfPlayer.HUMAN, imagesForPlayer);
+                    Player player = new Player(k, imagesForPlayer);
                     player.setDirection(Direction.STANDING);
                     map.addPlayerToMap(player, 14, 14);
                     players.add(player);
@@ -207,7 +202,7 @@ public class Game implements Initializable  {
 
                 }
                 case 2: {
-                    Player player = new Player(k, TypeOfPlayer.HUMAN, imagesForPlayer);
+                    Player player = new Player(k, imagesForPlayer);
                     player.setDirection(Direction.STANDING);
                     map.addPlayerToMap(player, 1, 14);
                     players.add(player);
@@ -215,7 +210,7 @@ public class Game implements Initializable  {
 
                 }
                 case 3: {
-                    Player player = new Player(k, TypeOfPlayer.HUMAN, imagesForPlayer);
+                    Player player = new Player(k, imagesForPlayer);
                     player.setDirection(Direction.STANDING);
                     map.addPlayerToMap(player, 14, 1);
                     players.add(player);

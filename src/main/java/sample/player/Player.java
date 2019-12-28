@@ -24,7 +24,6 @@ public class Player implements Observable {
 
 
     private int characterID;
-    private TypeOfPlayer typeOfPlayer;
 
     private ImageView imageView;
     private Rectangle hitbox;
@@ -41,18 +40,18 @@ public class Player implements Observable {
     private Direction direction;
     private double frame_counter;
 
-    public Player(int characterID, TypeOfPlayer typeOfPlayer, List<Image> images){
+    public Player(int characterID, List<Image> images){
         this.characterID = characterID;
-        this.typeOfPlayer = typeOfPlayer;
+
 
         this.images = images;
         this.imageView = new ImageView(images.get(1));
         this.imageView.setFitHeight(50);
         this.imageView.setFitWidth(50);
         this.hitbox = new Rectangle(25,25);
-        this.hitbox.setTranslateX(7.5);
-        this.hitbox.setTranslateY(7.5);
-        this.hitbox.setOpacity(0.0);
+        this.hitbox.setTranslateX(10);
+        this.hitbox.setTranslateY(2.5);
+        this.hitbox.setOpacity(1f);
         this.imageView.setFocusTraversable(true);
 
 
@@ -146,9 +145,27 @@ public class Player implements Observable {
                 {
                     return true;
                 }
-
             }
         }
+        for (Player otherPlayer:Game.players) {
+            if(otherPlayer.getCharacterID()!=this.characterID)
+            {
+                if(this.hitbox.getBoundsInParent().intersects(otherPlayer.getHitbox().getBoundsInParent()))
+                {
+                    return true;
+                }
+            }
+        }
+        for (Bomb bomb:Game.getMap().getBombs()) {
+            if(this.hitbox.getBoundsInParent().intersects(bomb.getRectangle().getBoundsInParent()))
+            {
+                if(bomb.getIdOfPlayerWhoPlantedBomb()!=this.characterID)
+                {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
     public boolean loseHealth()
@@ -184,7 +201,7 @@ public class Player implements Observable {
 
     public void plantBomb(Map map)
     {
-        Bomb bomb = new Bomb(new Image("/sprites/bomb/bomb_1.png"),(int)this.hitbox.getBoundsInParent().getMaxX()/50,(int)this.hitbox.getBoundsInParent().getMaxY()/50);
+        Bomb bomb = new Bomb(new Image("/sprites/bomb/bomb_1.png"),(int)this.hitbox.getBoundsInParent().getMinX()/50,(int)this.hitbox.getBoundsInParent().getMinY()/50,this.characterID);
 
         map.addBombToMap(bomb,(bomb.getX()),(bomb.getY()));
         bomb.detonate(map);
@@ -200,13 +217,7 @@ public class Player implements Observable {
         this.characterID = characterID;
     }
 
-    public TypeOfPlayer getTypeOfPlayer() {
-        return typeOfPlayer;
-    }
 
-    public void setTypeOfPlayer(TypeOfPlayer typeOfPlayer) {
-        this.typeOfPlayer = typeOfPlayer;
-    }
 
     public ImageView getImageView() {
         return imageView;

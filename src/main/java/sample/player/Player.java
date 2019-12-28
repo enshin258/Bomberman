@@ -51,7 +51,7 @@ public class Player implements Observable {
         this.hitbox = new Rectangle(25,25);
         this.hitbox.setTranslateX(10);
         this.hitbox.setTranslateY(2.5);
-        this.hitbox.setOpacity(1f);
+        this.hitbox.setOpacity(0f);
         this.imageView.setFocusTraversable(true);
 
 

@@ -24,6 +24,11 @@
                   <Image url="@../images/heart.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="55.0" layoutX="14.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../sprites/character1/row-1-col-2.png" />
+               </image>
+            </ImageView>
             <Text fx:id="lives_counter_1" layoutX="68.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
                <font>
                   <Font name="Bauhaus 93" size="96.0" />
@@ -44,6 +49,21 @@
                   <Font name="Bauhaus 93" size="96.0" />
                </font>
             </Text>
+            <ImageView fitHeight="100.0" fitWidth="55.0" layoutX="14.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../sprites/character2/row-1-col-2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="55.0" layoutX="14.0" layoutY="572.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../sprites/character3/row-1-col-2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="100.0" fitWidth="55.0" layoutX="14.0" layoutY="681.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../sprites/character4/row-1-col-2.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <GridPane fx:id="boardGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0">

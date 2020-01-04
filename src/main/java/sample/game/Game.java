@@ -1,13 +1,13 @@
 package sample.game;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 import sample.main.Menu;
 import sample.maps.MapObserver;
@@ -16,7 +16,6 @@ import sample.player.Player;
 import sample.maps.Map;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -283,14 +282,20 @@ public class Game implements Initializable  {
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                for (Player actualPlayer : players) {
-                    if (actualPlayer.checkIfPlayerIsInFire()) {
-                        changeLivesCounterPlayer(actualPlayer.getCharacterID());
+                Platform.runLater(() -> {
+                    for (Iterator<Player> iterator = players.iterator();iterator.hasNext();)
+                    {
+                        Player actualPlayer  = iterator.next();
+                        if (actualPlayer.checkIfPlayerIsInFire()) {
+                            changeLivesCounterPlayer(actualPlayer.getCharacterID());
+                        }
+                        if (actualPlayer.getDirection() != Direction.STANDING && actualPlayer.getLives() > 0) {
+                            map.notifyMapObservers(actualPlayer.getCharacterID());
+                        }
                     }
-                    if (actualPlayer.getDirection() != Direction.STANDING && actualPlayer.getLives() > 0) {
-                        map.notifyMapObservers(actualPlayer.getCharacterID());
-                    }
-                }
+
+                });
+
             }
         };
         gameLoop.start();

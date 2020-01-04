@@ -1,11 +1,12 @@
 package sample.maps;
 
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-public class Title{
+public class Title extends Node {
 
     private final Rectangle rectangle;
     private TypeOfTitle typeOfTitle;

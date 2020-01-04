@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 import sample.main.Menu;
 import sample.maps.MapObserver;
@@ -12,6 +15,8 @@ import sample.player.Direction;
 import sample.player.Player;
 import sample.maps.Map;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -35,6 +40,8 @@ public class Game implements Initializable  {
     static public final Vector<Player> players = new Vector<>();
     static public final Vector<Text> counters = new Vector<>();
     final MapObserver mapObserver = new MapObserver();
+
+    private MediaPlayer mediaPlayer;
 
 
 
@@ -258,12 +265,21 @@ public class Game implements Initializable  {
             System.out.println("Koniec gry!");
             System.out.println("Wygrał gracz numer: " + players.get(0).getCharacterID());
             Menu.getActualStage().close();
+            System.exit(0);
         }
     }
 
 
     private void startGame(){
         System.out.println("Start gry");
+
+
+        Media media = new Media(new File("src/main/resources/sounds/MainTheme.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+
+
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {

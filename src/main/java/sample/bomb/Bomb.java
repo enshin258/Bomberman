@@ -3,6 +3,8 @@ package sample.bomb;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -11,6 +13,7 @@ import sample.maps.Map;
 import sample.maps.Title;
 import sample.maps.TypeOfTitle;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -30,6 +33,8 @@ public class Bomb {
     }
     synchronized public void detonate(Map map)
     {
+
+
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(500),
@@ -46,6 +51,10 @@ public class Bomb {
                     Game.getMap().getBombs().remove(this);
                     map.getMapGridPane().getChildren().remove(this.rectangle);
                     setActualExplosionLevel(map,1);
+                    String path = "src/main/resources/sounds/Explosion.wav";
+                    Media media = new Media(new File(path).toURI().toString());
+                    MediaPlayer mediaPlayer = new MediaPlayer(media);
+                    mediaPlayer.play();
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(1600),

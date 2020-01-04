@@ -37,8 +37,10 @@ public class Game implements Initializable  {
 
 
     static public final Vector<Player> players = new Vector<>();
+    static public final Vector<Player> playersToRemove = new Vector<>();
     static public final Vector<Text> counters = new Vector<>();
     final MapObserver mapObserver = new MapObserver();
+    private static int numberOfLivingPlayers;
 
     private MediaPlayer mediaPlayer;
 
@@ -47,6 +49,7 @@ public class Game implements Initializable  {
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
 
+        numberOfLivingPlayers = Menu.getNumberOfPlayers();
         counters.add(lives_counter_1);
         counters.add(lives_counter_2);
         counters.add(lives_counter_3);
@@ -56,47 +59,84 @@ public class Game implements Initializable  {
         addPlayers();
 
         boardGridPane.setOnKeyPressed(event -> {
+
             switch (event.getCode()) {
                 case W:
-                    players.get(0).setDirection(Direction.UP);
+                    if(players.get(0)!=null)
+                    {
+                        players.get(0).setDirection(Direction.UP);
+                    }
                     break;
                 case UP:
-                    players.get(1).setDirection(Direction.UP);
+                    if(players.get(1)!=null)
+                    {
+                        players.get(1).setDirection(Direction.UP);
+                    }
                     break;
                 case NUMPAD8:
-                    players.get(2).setDirection(Direction.UP);
+                    if(players.get(2)!=null)
+                    {
+                        players.get(2).setDirection(Direction.UP);
+                    }
                     break;
                 case I:
-                    players.get(3).setDirection(Direction.UP);
+                    if(players.get(3)!=null)
+                    {
+                        players.get(3).setDirection(Direction.UP);
+                    }
                     break;
 
 
                 case S:
-                    players.get(0).setDirection(Direction.DOWN);
+                    if(players.get(0)!=null)
+                    {
+                        players.get(0).setDirection(Direction.DOWN);
+                    }
                     break;
                 case DOWN:
-                    players.get(1).setDirection(Direction.DOWN);
+                    if(players.get(1)!=null)
+                    {
+                        players.get(1).setDirection(Direction.DOWN);
+                    }
                     break;
                 case NUMPAD2:
-                    players.get(2).setDirection(Direction.DOWN);
+                    if(players.get(2)!=null)
+                    {
+                        players.get(2).setDirection(Direction.DOWN);
+                    }
                     break;
                 case K:
-                    players.get(3).setDirection(Direction.DOWN);
+                    if(players.get(3)!=null)
+                    {
+                        players.get(3).setDirection(Direction.DOWN);
+                    }
                     break;
 
 
 
                 case A:
-                    players.get(0).setDirection(Direction.LEFT);
+                    if(players.get(0)!=null)
+                    {
+                        players.get(0).setDirection(Direction.LEFT);
+                    }
                     break;
                 case LEFT:
-                    players.get(1).setDirection(Direction.LEFT);
+                    if(players.get(1)!=null)
+                    {
+                        players.get(1).setDirection(Direction.LEFT);
+                    }
                     break;
                 case NUMPAD4:
-                    players.get(2).setDirection(Direction.LEFT);
+                    if(players.get(2)!=null)
+                    {
+                        players.get(2).setDirection(Direction.LEFT);
+                    }
                     break;
                 case J:
-                    players.get(3).setDirection(Direction.LEFT);
+                    if(players.get(3)!=null)
+                    {
+                        players.get(3).setDirection(Direction.LEFT);
+                    }
                     break;
 
 
@@ -104,40 +144,52 @@ public class Game implements Initializable  {
 
 
                 case D:
-                    players.get(0).setDirection(Direction.RIGHT);
+                    if(players.get(0)!=null)
+                    {
+                        players.get(0).setDirection(Direction.RIGHT);
+                    }
                     break;
                 case RIGHT:
-                    players.get(1).setDirection(Direction.RIGHT);
+                    if(players.get(1)!=null)
+                    {
+                        players.get(1).setDirection(Direction.RIGHT);
+                    }
                     break;
                 case NUMPAD6:
-                    players.get(2).setDirection(Direction.RIGHT);
+                    if(players.get(2)!=null)
+                    {
+                        players.get(2).setDirection(Direction.RIGHT);
+                    }
                     break;
                 case L:
-                    players.get(3).setDirection(Direction.RIGHT);
+                    if(players.get(3)!=null)
+                    {
+                        players.get(3).setDirection(Direction.RIGHT);
+                    }
                     break;
 
 
 
                 case SPACE:
-                    if(players.get(0).getLives()>0)
+                    if(players.get(0)!=null)
                     {
                         players.get(0).plantBomb(map);
                     }
                     break;
                 case SHIFT:
-                    if(players.get(1).getLives()>0)
+                    if(players.get(1)!=null)
                     {
                         players.get(1).plantBomb(map);
                     }
                     break;
                 case NUMPAD5:
-                    if(players.get(2).getLives()>0)
+                    if(players.get(2)!=null)
                     {
                         players.get(2).plantBomb(map);
                     }
                     break;
                 case SEMICOLON:
-                    if(players.get(3).getLives()>0)
+                    if(players.get(3)!=null)
                     {
                         players.get(3).plantBomb(map);
                     }
@@ -150,25 +202,37 @@ public class Game implements Initializable  {
                 case A:
                 case S:
                 case D:
-                    players.get(0).setDirection(Direction.STANDING);
+                    if(players.get(0)!=null)
+                    {
+                        players.get(0).setDirection(Direction.STANDING);
+                    }
                     break;
                 case UP:
                 case LEFT:
                 case DOWN:
                 case RIGHT:
-                    players.get(1).setDirection(Direction.STANDING);
+                    if(players.get(1)!=null)
+                    {
+                        players.get(1).setDirection(Direction.STANDING);
+                    }
                     break;
                 case NUMPAD8:
                 case NUMPAD4:
                 case NUMPAD2:
                 case NUMPAD6:
-                    players.get(2).setDirection(Direction.STANDING);
+                    if(players.get(2)!=null)
+                    {
+                        players.get(2).setDirection(Direction.STANDING);
+                    }
                     break;
                 case I:
                 case J:
                 case K:
                 case L:
-                    players.get(3).setDirection(Direction.STANDING);
+                    if(players.get(3)!=null)
+                    {
+                        players.get(3).setDirection(Direction.STANDING);
+                    }
                     break;
             }
         });
@@ -249,7 +313,8 @@ public class Game implements Initializable  {
             map.getMapGridPane().getChildren().remove(player.getImageView());
             map.getMapGridPane().getChildren().remove(player.getHitbox());
             System.out.println("Gracz numer: " + player.getCharacterID() + " przegrał gre");
-            players.remove(player);
+            playersToRemove.add(player);
+            numberOfLivingPlayers--;
 
         }
         checkIfEndGame();
@@ -259,13 +324,15 @@ public class Game implements Initializable  {
 
     public static void checkIfEndGame()
     {
-        if(players.size()==1)
+
+        if(numberOfLivingPlayers==1)
         {
             System.out.println("Koniec gry!");
-            System.out.println("Wygrał gracz numer: " + players.get(0).getCharacterID());
             Menu.getActualStage().close();
             System.exit(0);
         }
+
+
     }
 
 
@@ -282,19 +349,35 @@ public class Game implements Initializable  {
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                Platform.runLater(() -> {
-                    for (Iterator<Player> iterator = players.iterator();iterator.hasNext();)
-                    {
-                        Player actualPlayer  = iterator.next();
-                        if (actualPlayer.checkIfPlayerIsInFire()) {
-                            changeLivesCounterPlayer(actualPlayer.getCharacterID());
-                        }
-                        if (actualPlayer.getDirection() != Direction.STANDING && actualPlayer.getLives() > 0) {
-                            map.notifyMapObservers(actualPlayer.getCharacterID());
-                        }
-                    }
+                try
+                {
+                    Platform.runLater(() -> {
+                        for (Iterator<Player> iterator = players.iterator();iterator.hasNext();)
+                        {
+                            Player actualPlayer  = iterator.next();
+                            if(actualPlayer!=null)
+                            {
+                                if (actualPlayer.checkIfPlayerIsInFire()) {
+                                    changeLivesCounterPlayer(actualPlayer.getCharacterID());
+                                }
+                                if (actualPlayer.getDirection() != Direction.STANDING && actualPlayer.getLives() > 0) {
+                                    map.notifyMapObservers(actualPlayer.getCharacterID());
+                                }
+                                if(playersToRemove.contains(actualPlayer))
+                                {
+                                    players.set(players.indexOf(actualPlayer),null);
+                                }
+                                playersToRemove.clear();
 
-                });
+                            }
+                        }
+                    });
+                }
+                catch (Exception e)
+                {
+
+                }
+
 
             }
         };

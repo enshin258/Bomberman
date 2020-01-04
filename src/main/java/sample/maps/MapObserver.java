@@ -7,27 +7,31 @@ import sample.player.Player;
 public class MapObserver implements Observer {
     public void update(int idOfPlayer) {
         for (Player player:Game.players) {
-            if(player.getCharacterID()==idOfPlayer)
+            if(player!=null)
             {
-                switch (player.getDirection())
+                if(player.getCharacterID()==idOfPlayer)
                 {
-                    case UP:
-                        player.move(0,-player.getSpeed());
-                        break;
-                    case DOWN:
-                        player.move(0,player.getSpeed());
-                        break;
-                    case LEFT:
-                        player.move(-player.getSpeed(),0);
-                        break;
-                    case RIGHT:
-                        player.move(player.getSpeed(),0);
-                        break;
-                    case STANDING:
-                        player.move(0,0);
-                        break;
+                    switch (player.getDirection())
+                    {
+                        case UP:
+                            player.move(0,-player.getSpeed());
+                            break;
+                        case DOWN:
+                            player.move(0,player.getSpeed());
+                            break;
+                        case LEFT:
+                            player.move(-player.getSpeed(),0);
+                            break;
+                        case RIGHT:
+                            player.move(player.getSpeed(),0);
+                            break;
+                        case STANDING:
+                            player.move(0,0);
+                            break;
+                    }
                 }
             }
+
         }
 
     }

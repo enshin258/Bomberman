@@ -129,13 +129,17 @@ public class Player {
             }
         }
         for (Player otherPlayer:Game.players) {
-            if(otherPlayer.getCharacterID()!=this.characterID)
+            if(otherPlayer!=null)
             {
-                if(this.hitbox.getBoundsInParent().intersects(otherPlayer.getHitbox().getBoundsInParent()))
+                if(otherPlayer.getCharacterID()!=this.characterID)
                 {
-                    return true;
+                    if(this.hitbox.getBoundsInParent().intersects(otherPlayer.getHitbox().getBoundsInParent()))
+                    {
+                        return true;
+                    }
                 }
             }
+
         }
         for (Bomb bomb:Game.getMap().getBombs()) {
             if(this.hitbox.getBoundsInParent().intersects(bomb.getRectangle().getBoundsInParent()))

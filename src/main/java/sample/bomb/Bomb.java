@@ -1,9 +1,7 @@
 package sample.bomb;
 
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -17,16 +15,14 @@ import java.util.Iterator;
 import java.util.Vector;
 
 public class Bomb {
-    Rectangle rectangle;
-    Image sprite;
-    int x;
-    int y;
-    int idOfPlayerWhoPlantedBomb;
-    public Vector<Title> lastFires = new Vector<>();
+    private final Rectangle rectangle;
+    private final int x;
+    private final int y;
+    private final int idOfPlayerWhoPlantedBomb;
+    private final Vector<Title> lastFires = new Vector<>();
 
     public Bomb(Image sprite,int x,int y,int idOfPlayerWhoPlantedBomb) {
         this.rectangle = new Rectangle(40,40);
-        this.sprite = sprite;
         this.rectangle.setFill(new ImagePattern(sprite));
         this.x=x;
         this.y=y;
@@ -38,75 +34,71 @@ public class Bomb {
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(500),
                 event ->
-                {
-                    this.rectangle.setFill(new ImagePattern(new Image("/sprites/bomb/bomb_2.png")));
-                }));
+                        this.rectangle.setFill(new ImagePattern(new Image("/sprites/bomb/bomb_2.png")))));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(1000),
                 event ->
-                {
-                    this.rectangle.setFill(new ImagePattern(new Image("/sprites/bomb/bomb_3.png")));
-                }));
+                        this.rectangle.setFill(new ImagePattern(new Image("/sprites/bomb/bomb_3.png")))));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(1500),
                 event ->
                 {
                     Game.getMap().getBombs().remove(this);
                     map.getMapGridPane().getChildren().remove(this.rectangle);
-                    explosionLevel(map,1);
+                    setActualExplosionLevel(map,1);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(1600),
                 event ->
                 {
-                    resetFire(map);
-                    explosionLevel(map,2);
+                    removeFireTitles(map);
+                    setActualExplosionLevel(map,2);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(1700),
                 event ->
                 {
-                    resetFire(map);
+                    removeFireTitles(map);
 
-                    explosionLevel(map,3);
+                    setActualExplosionLevel(map,3);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
             Duration.millis(1800),
             event ->
             {
-                resetFire(map);
+                removeFireTitles(map);
 
-                explosionLevel(map,4);
+                setActualExplosionLevel(map,4);
             }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(1900),
                 event ->
                 {
-                    resetFire(map);
+                    removeFireTitles(map);
 
-                    explosionLevel(map,3);
+                    setActualExplosionLevel(map,3);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(2000),
                 event ->
                 {
-                    resetFire(map);
+                    removeFireTitles(map);
 
-                    explosionLevel(map,2);
+                    setActualExplosionLevel(map,2);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(2100),
                 event ->
                 {
-                    resetFire(map);
+                    removeFireTitles(map);
 
-                    explosionLevel(map,1);
+                    setActualExplosionLevel(map,1);
                 }));
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(2200),
                 event ->
                 {
-                    resetFire(map);
+                    removeFireTitles(map);
 
                     timeline.stop();
                 }));
@@ -116,34 +108,33 @@ public class Bomb {
 
 
     }
-    public void explosionLevel(Map map,int level)
+    public void setActualExplosionLevel(Map map,int level)
     {
         switch (level)
         {
             case 1:
             {
-                addFire(map,"1");
+                addFireTitles(map,"1");
                 break;
             }
             case 2:
             {
-                addFire(map,"2");
+                addFireTitles(map,"2");
                 break;
             }
             case 3:
             {
-                addFire(map,"3");
+                addFireTitles(map,"3");
                 break;
             }
             case 4:
             {
-                addFire(map,"4");
-
+                addFireTitles(map,"4");
                 break;
             }
         }
     }
-    public void addFire(Map map,String level)
+    public void addFireTitles(Map map,String level)
     {
 
         String path = "/sprites/explosion/level" + level + "/center_fire.png";
@@ -267,21 +258,14 @@ public class Bomb {
                     t.setTypeOfTitle(TypeOfTitle.FLOOR);
                     return true;
                 }
-                else if(t.getTypeOfTitle()==TypeOfTitle.FLOOR)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                else return t.getTypeOfTitle() == TypeOfTitle.FLOOR;
             }
 
         }
         return true;
     }
 
-    public void resetFire(Map map)
+    public void removeFireTitles(Map map)
     {
         for (Iterator<Title> iterator = map.getTitles().iterator(); iterator.hasNext();) {
             Title t = iterator.next();
@@ -298,39 +282,16 @@ public class Bomb {
         return rectangle;
     }
 
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
-    }
-
-    public Image getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Image sprite) {
-        this.sprite = sprite;
-    }
-
     public int getX() {
         return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
     }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public int getIdOfPlayerWhoPlantedBomb() {
         return idOfPlayerWhoPlantedBomb;
     }
 
-    public void setIdOfPlayerWhoPlantedBomb(int idOfPlayerWhoPlantedBomb) {
-        this.idOfPlayerWhoPlantedBomb = idOfPlayerWhoPlantedBomb;
-    }
 }

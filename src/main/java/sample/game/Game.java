@@ -32,9 +32,9 @@ public class Game implements Initializable  {
     static private Map map;
 
 
-    static public Vector<Player> players = new Vector<>();
-    static public Vector<Text> counters = new Vector<>();
-    MapObserver mapObserver = new MapObserver();
+    static public final Vector<Player> players = new Vector<>();
+    static public final Vector<Text> counters = new Vector<>();
+    final MapObserver mapObserver = new MapObserver();
 
 
 
@@ -167,7 +167,7 @@ public class Game implements Initializable  {
             }
         });
 
-        System.out.println("INICJALIZACJA GRY");
+        System.out.println("Inicjalizacja gry");
         startGame();
 
     }
@@ -175,15 +175,15 @@ public class Game implements Initializable  {
     {
         map = new Map();
         map.setMapGridPane(boardGridPane);
-        map.attach(mapObserver);
+        map.addMapObserver(mapObserver);
         map.loadMap();
     }
     private void addPlayers()
     {
-        for(int k = 0; k<Menu.getNumberOfPlayers(); k++) {
+        for(int k = 0; k < Menu.getNumberOfPlayers(); k++) {
             List<Image> imagesForPlayer = new LinkedList<>();
             for (int i = 1; i <= 16; i++) {
-                String nameOfFile = "/sprites/character" + (k+1) + "/row-1-col-" + i + ".png";
+                String nameOfFile = "/sprites/character" + k + "/row-1-col-" + i + ".png";
                 imagesForPlayer.add(new Image(nameOfFile));
             }
             switch (k) {
@@ -232,44 +232,47 @@ public class Game implements Initializable  {
 
     public void changeLivesCounterPlayer(int idOfPlayer)
     {
+
         Player player = players.get(idOfPlayer);
         player.setLives(player.getLives()-1);
         counters.get(idOfPlayer).setText(Integer.toString(player.getLives()));
+        System.out.println("Gracz: "+player.getCharacterID() + " stracil zycie, pozostalo: " + player.getLives());
         if(player.getLives()<=0)
         {
 
             map.getMapGridPane().getChildren().remove(player.getImageView());
             map.getMapGridPane().getChildren().remove(player.getHitbox());
-            System.out.println("GRACZ NUMER: " + player.getCharacterID() + "PRZEGRAł");
-            endGame();
-        }
+            System.out.println("Gracz numer: " + player.getCharacterID() + " przegrał gre");
+            players.remove(player);
 
+        }
+        checkIfEndGame();
     }
 
 
 
-    public static void endGame()
+    public static void checkIfEndGame()
     {
-
-        //System.out.println("Koniec GRY!");
-        //Menu.getActualStage().close();
-
+        if(players.size()==1)
+        {
+            System.out.println("Koniec gry!");
+            System.out.println("Wygrał gracz numer: " + players.get(0).getCharacterID());
+            Menu.getActualStage().close();
+        }
     }
 
 
     private void startGame(){
-        System.out.println("START W GAME");
+        System.out.println("Start gry");
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                for (Player player:players) {
-                    if(player.loseHealth())
-                    {
-                        changeLivesCounterPlayer(player.getCharacterID());
+                for (Player actualPlayer : players) {
+                    if (actualPlayer.checkIfPlayerIsInFire()) {
+                        changeLivesCounterPlayer(actualPlayer.getCharacterID());
                     }
-                    if(player.getDirection()!=Direction.STANDING && player.getLives()>0)
-                    {
-                        map.notifyObservers(player.getCharacterID());
+                    if (actualPlayer.getDirection() != Direction.STANDING && actualPlayer.getLives() > 0) {
+                        map.notifyMapObservers(actualPlayer.getCharacterID());
                     }
                 }
             }

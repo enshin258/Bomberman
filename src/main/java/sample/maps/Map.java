@@ -5,22 +5,20 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import sample.bomb.Bomb;
 import sample.interfaces.Observable;
 import sample.interfaces.Observer;
-import sample.main.MenuObserver;
 import sample.player.Player;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
 public class Map implements Observable {
 
     private GridPane mapGridPane;
-    private Vector<Title> titles = new Vector<>();
-    private Vector<Bomb> bombs = new Vector<>();
-    private Set<MapObserver> observerInterfaces = new HashSet<>();
+    private final Vector<Title> titles = new Vector<>();
+    private final Vector<Bomb> bombs = new Vector<>();
+    private final Set<MapObserver> observerInterfaces = new HashSet<>();
 
 
     public void loadMap(){
@@ -48,9 +46,7 @@ public class Map implements Observable {
         this.mapGridPane.add(fire.getRectangle(),x,y);
         titles.add(fire);
     }
-
-
-
+    
     public GridPane getMapGridPane() {
         return mapGridPane;
     }
@@ -67,28 +63,28 @@ public class Map implements Observable {
         return bombs;
     }
 
-    public void attach(MapObserver observerInterface) {
+    public void addMapObserver(MapObserver observerInterface) {
         this.observerInterfaces.add(observerInterface);
     }
 
-    @Override
-    public void attach(Observer observerInterface) {
-
+    public void notifyMapObservers(int playerID) {
+        for (MapObserver mapObserver:this.observerInterfaces) {
+            mapObserver.update(playerID);
+        }
     }
 
     @Override
-    public void detach(Observer observerInterface) {
-        this.observerInterfaces.remove(observerInterface);
+    public void addObserver(Observer observer) {
+        
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+
     }
 
     @Override
     public void notifyObservers() {
 
-    }
-
-    public void notifyObservers(int playerID) {
-        for (MapObserver mapObserver:this.observerInterfaces) {
-            mapObserver.update(playerID);
-        }
     }
 }

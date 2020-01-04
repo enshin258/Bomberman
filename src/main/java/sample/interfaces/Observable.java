@@ -1,7 +1,8 @@
 package sample.interfaces;
 
 public interface Observable {
-    void attach(Observer observerInterface);
-    void detach(Observer observerInterface);
-    void notifyObservers();
+     void addObserver(Observer observer);
+     void removeObserver(Observer observer);
+     void notifyObservers();
+
 }

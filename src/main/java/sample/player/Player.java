@@ -1,39 +1,28 @@
 package sample.player;
 
-import javafx.animation.TranslateTransition;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import sample.bomb.Bomb;
 import sample.game.Game;
-import sample.interfaces.Observable;
-import sample.interfaces.Observer;
-import sample.main.Main;
 import sample.maps.Map;
 import sample.maps.Title;
 import sample.maps.TypeOfTitle;
 
 import java.util.*;
 
-public class Player implements Observable {
-
-    private Set<Observer> observerInterfaces = new HashSet<>();
+public class Player {
 
 
-    private int characterID;
+    private final int characterID;
 
-    private ImageView imageView;
-    private Rectangle hitbox;
-    private List<Image> images;
-    public boolean invicible=false;
+    private final ImageView imageView;
+    private final Rectangle hitbox;
+    private final List<Image> images;
+    private boolean invincible=false;
 
 
-    private double speed;
-    private double power;
-    private double maxBombs;
+    private final double speed;
     private int lives;
 
 
@@ -58,8 +47,6 @@ public class Player implements Observable {
         this.frame_counter=1;
 
         this.speed=2;
-        this.power=2;
-        this.maxBombs=1;
         this.lives=3;
     }
 
@@ -77,12 +64,6 @@ public class Player implements Observable {
 
         double newX = this.imageView.getTranslateX()+ dx;
         double newY = this.imageView.getTranslateY()+ dy;
-
-//        System.out.println("X2: " + this.imageView.getBoundsInParent().getMaxX());
-//        System.out.println("Y2: " + this.imageView.getBoundsInParent().getMaxY());
-
-
-
 
         this.imageView.setTranslateX(newX);
         this.imageView.setTranslateY(newY);
@@ -168,27 +149,24 @@ public class Player implements Observable {
 
         return false;
     }
-    public boolean loseHealth()
+    public boolean checkIfPlayerIsInFire()
     {
         for(Title t:Game.getMap().getTitles())
         {
             if(this.hitbox.getBoundsInParent().intersects(t.getRectangle().getBoundsInParent()))
             {
-                if(t.getTypeOfTitle()==TypeOfTitle.FIRE && !this.invicible && this.getLives()>0)
+                if(t.getTypeOfTitle()==TypeOfTitle.FIRE && !this.invincible && this.getLives()>0)
                 {
 
-                    this.invicible=true;
+                    this.invincible =true;
                     this.imageView.setOpacity(0.5f);
-                    System.out.println("STRACONO ZYCIE, POZOSTALO: " + this.lives);
-                    System.out.println("GRACZ: " + this.characterID + "JEST NIESMIERTELNY");
 
                     Timer myTimer = new Timer();
                     myTimer.schedule(new TimerTask(){
                         @Override
                         public void run() {
-                            invicible=false;
+                            invincible =false;
                             imageView.setOpacity(1f);
-                            System.out.println("Gracz: " + characterID + " Znowu smiertelny");
                         }
                     }, 1000);
                     return true;
@@ -213,50 +191,17 @@ public class Player implements Observable {
         return characterID;
     }
 
-    public void setCharacterID(int characterID) {
-        this.characterID = characterID;
-    }
-
-
 
     public ImageView getImageView() {
         return imageView;
-    }
-
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
     }
 
     public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
-
     public double getSpeed() {
         return speed;
-    }
-
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
-    public double getPower() {
-        return power;
-    }
-
-    public void setPower(double power) {
-        this.power = power;
-    }
-
-    public double getMaxBombs() {
-        return maxBombs;
-    }
-
-    public void setMaxBombs(double maxBombs) {
-        this.maxBombs = maxBombs;
     }
 
     public Direction getDirection() {
@@ -275,26 +220,5 @@ public class Player implements Observable {
         this.lives = lives;
     }
 
-    public Set<Observer> getObserverInterfaces() {
-        return observerInterfaces;
-    }
-
-    public void setObserverInterfaces(Set<Observer> observerInterfaces) {
-        this.observerInterfaces = observerInterfaces;
-    }
-    @Override
-    public void attach(Observer observerInterface) {
-        this.observerInterfaces.add(observerInterface);
-    }
-
-    @Override
-    public void detach(Observer observerInterface) {
-        this.observerInterfaces.remove(observerInterface);
-    }
-
-    @Override
-    public void notifyObservers() {
-        this.observerInterfaces.forEach(Observer::update);
-    }
 }
 

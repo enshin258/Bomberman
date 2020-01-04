@@ -1,13 +1,10 @@
 package sample.main;
 
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import sample.interfaces.Observable;
@@ -32,7 +29,7 @@ public class Menu implements Initializable, Observable {
     RadioButton players_4;
 
 
-    private Set<Observer> observerInterfaces = new HashSet<>();
+    private final Set<Observer> observers = new HashSet<>();
     private static TypeOfButton clickedButton;
     private static Stage actualStage;
     private static int numberOfPlayers=2;
@@ -42,23 +39,18 @@ public class Menu implements Initializable, Observable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MenuObserver menuObserver = new MenuObserver();
-        attach(menuObserver);
+        addObserver(menuObserver);
 
         ToggleGroup toggleGroup = new ToggleGroup();
         players_2.setToggleGroup(toggleGroup);
         players_3.setToggleGroup(toggleGroup);
         players_4.setToggleGroup(toggleGroup);
 
-        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
-        {
-            public void changed(ObservableValue<? extends Toggle> ob,
-                                Toggle o, Toggle n)
-            {
-                RadioButton rb = (RadioButton)toggleGroup.getSelectedToggle();
-                if (rb != null) {
-                    numberOfPlayers = Integer.parseInt(rb.getText().charAt(0)+"");
-                    System.out.println("ILOSC GRACZY: " + numberOfPlayers);
-                }
+        toggleGroup.selectedToggleProperty().addListener((ob, o, n) -> {
+            RadioButton rb = (RadioButton) toggleGroup.getSelectedToggle();
+            if (rb != null) {
+                numberOfPlayers = Integer.parseInt(rb.getText().charAt(0) + "");
+                System.out.println("Ilosc graczy: " + numberOfPlayers);
             }
         });
 
@@ -74,31 +66,34 @@ public class Menu implements Initializable, Observable {
             clickedButton = TypeOfButton.EXIT;
             userClickedButton();
         });
-        System.out.println("INICJALIZACJA W MENU");
+
+    }
+    
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.observers.add(observer);
 
     }
 
     @Override
-     public void attach(Observer observerInterface) {
-        this.observerInterfaces.add(observerInterface);
+    public void removeObserver(Observer observer) {
+        this.observers.remove(observer);
     }
 
-    @Override
-    public void detach(Observer observerInterface) {
-        this.observerInterfaces.remove(observerInterface);
-    }
 
-    @Override
     public void notifyObservers() {
-        this.observerInterfaces.forEach(Observer::update);
+        this.observers.forEach(Observer::update);
     }
     private void userClickedButton()
     {
         notifyObservers();
     }
+    
     static TypeOfButton getClickedButton() {
         return clickedButton;
     }
+    
     public static Stage getActualStage() {
         return actualStage;
     }

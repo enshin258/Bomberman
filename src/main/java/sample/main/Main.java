@@ -14,7 +14,6 @@ public class Main extends Application {
         primaryStage.setTitle("BomberMan");
         primaryStage.setScene(new Scene(root, 900, 675));
         primaryStage.show();
-        System.out.println("START W FUNKCJI MAIN");
     }
 
 

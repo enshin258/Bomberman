@@ -19,6 +19,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * the main class that handles the entire game and is responsible for its logic
+ */
+
 public class Game implements Initializable  {
 
 
@@ -36,16 +40,32 @@ public class Game implements Initializable  {
     static private Map map;
 
 
+    /**
+     * vector of players in game
+     */
     static public final Vector<Player> players = new Vector<>();
+    /**
+     * additional vector used for deleting players
+     */
     static public final Vector<Player> playersToRemove = new Vector<>();
+    /**
+     * vector of graphical counters in game
+     */
     static public final Vector<Text> counters = new Vector<>();
     final MapObserver mapObserver = new MapObserver();
     private static int numberOfLivingPlayers;
 
+    /**
+     * used in music
+     */
     private MediaPlayer mediaPlayer;
 
 
-
+    /**
+     * initialize game, setting control of players
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
 
@@ -241,6 +261,10 @@ public class Game implements Initializable  {
         startGame();
 
     }
+
+    /**
+     * generate adn add map to game
+     */
     private void generateMap()
     {
         map = new Map();
@@ -248,6 +272,10 @@ public class Game implements Initializable  {
         map.addMapObserver(mapObserver);
         map.loadMap();
     }
+
+    /**
+     * add players based on option in main menu, and load their sprites
+     */
     private void addPlayers()
     {
         for(int k = 0; k < Menu.getNumberOfPlayers(); k++) {
@@ -300,6 +328,10 @@ public class Game implements Initializable  {
     }
 
 
+    /**
+     * chanhe number of lives on player counter
+     * @param idOfPlayer determines the player who lost his life
+     */
     public void changeLivesCounterPlayer(int idOfPlayer)
     {
 
@@ -321,7 +353,9 @@ public class Game implements Initializable  {
     }
 
 
-
+    /**
+     * check if there is only one living player
+     */
     public static void checkIfEndGame()
     {
 
@@ -336,6 +370,9 @@ public class Game implements Initializable  {
     }
 
 
+    /**
+     * starts game timer
+     */
     private void startGame(){
         System.out.println("Start gry");
 
@@ -368,7 +405,6 @@ public class Game implements Initializable  {
                                     players.set(players.indexOf(actualPlayer),null);
                                 }
                                 playersToRemove.clear();
-
                             }
                         }
                     });

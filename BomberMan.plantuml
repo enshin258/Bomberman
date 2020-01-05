@@ -100,6 +100,7 @@ title __BOMBERMAN's Class Diagram__\n
   sample.main.MenuObserver .up.|> sample.interfaces.Observer
   sample.maps.Map .up.|> sample.interfaces.Observable
   sample.maps.MapObserver .up.|> sample.interfaces.Observer
+  sample.maps.Title -up-|> javafx.scene.Node
   sample.maps.Title o-- sample.maps.TypeOfTitle : typeOfTitle
   sample.player.Player o-- sample.player.Direction : direction
 

@@ -13,6 +13,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+/**
+ * the class responsible for the board on which the game is played
+ */
 public class Map implements Observable {
 
     private GridPane mapGridPane;

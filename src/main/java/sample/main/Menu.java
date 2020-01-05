@@ -15,6 +15,9 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+/**
+ * the class responsible from the menu visible at the start of the game
+ */
 public class Menu implements Initializable, Observable {
 
     @FXML
@@ -35,7 +38,11 @@ public class Menu implements Initializable, Observable {
     private static int numberOfPlayers=2;
 
 
-
+    /**
+     * sets the button behavior in the game menu
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MenuObserver menuObserver = new MenuObserver();

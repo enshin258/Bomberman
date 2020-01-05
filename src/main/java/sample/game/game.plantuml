@@ -6,6 +6,7 @@ title __GAME's Class Diagram__\n
     class sample.game.Game {
         {static} + counters : Vector<Text>
         {static} + players : Vector<Player>
+        {static} + playersToRemove : Vector<Player>
         ~ boardGridPane : GridPane
         ~ lives_counter_1 : Text
         ~ lives_counter_2 : Text
@@ -13,6 +14,7 @@ title __GAME's Class Diagram__\n
         ~ lives_counter_4 : Text
         {static} - map : Map
         - mediaPlayer : MediaPlayer
+        {static} - numberOfLivingPlayers : int
         + changeLivesCounterPlayer()
         {static} + checkIfEndGame()
         {static} + getMap()

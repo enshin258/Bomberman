@@ -4,6 +4,9 @@ import sample.game.Game;
 import sample.interfaces.Observer;
 import sample.player.Player;
 
+/**
+ * the class reacts to the current direction of the player
+ */
 public class MapObserver implements Observer {
     public void update(int idOfPlayer) {
         for (Player player:Game.players) {

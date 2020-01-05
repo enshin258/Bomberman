@@ -16,8 +16,11 @@ import sample.maps.TypeOfTitle;
 import java.io.File;
 import java.util.Iterator;
 import java.util.Vector;
-
+/**
+ * class responsible for the appearance and behaviour of bombs planted by players (@see {@link sample.player.Player})
+ * **/
 public class Bomb {
+
     private final Rectangle rectangle;
     private final int x;
     private final int y;
@@ -31,6 +34,11 @@ public class Bomb {
         this.y=y;
         this.idOfPlayerWhoPlantedBomb = idOfPlayerWhoPlantedBomb;
     }
+
+    /**
+     * method triggers explosion sequences by queuing animations
+     * @param map is a link to the map
+     */
     synchronized public void detonate(Map map)
     {
 
@@ -117,6 +125,12 @@ public class Bomb {
 
 
     }
+
+    /**
+     * sets the current bomb blast level
+     * @param map is a link to the map
+     * @param level is a level of explosion
+     */
     public void setActualExplosionLevel(Map map,int level)
     {
         switch (level)
@@ -143,6 +157,13 @@ public class Bomb {
             }
         }
     }
+
+    /**
+     * adds fields of fire, calculating the appropriate locations,
+     * and adds appropriate graphics depending on the current explosion level
+     * @param map is a link to the map
+     * @param level is a level of explosion
+     */
     public void addFireTitles(Map map,String level)
     {
 
@@ -255,6 +276,15 @@ public class Bomb {
             }
         }
     }
+
+    /**
+     * check if next title on range of explosion is flammable
+     * if the next field is a brick field, then it destroys it and makes you walk on it
+     * @param nextX next fire x coordinate
+     * @param nextY next fire y coordinate
+     * @param map is a link to map
+     * @return true if next title is flammable
+     */
     
     public boolean checkIfNextTitleIsFlammable(int nextX,int nextY,Map map)
     {
@@ -273,6 +303,11 @@ public class Bomb {
         }
         return true;
     }
+
+    /**
+     * removes fields of fire that no longer burn
+     * @param map is a link to map
+     */
 
     public void removeFireTitles(Map map)
     {

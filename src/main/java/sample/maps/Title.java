@@ -6,12 +6,16 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * class responsible for the tiles on the map
+ */
 public class Title extends Node {
 
     private final Rectangle rectangle;
     private TypeOfTitle typeOfTitle;
     private final int x;
     private final int y;
+
 
     public Title(Image sprite, TypeOfTitle typeOfTitle,int x,int y) {
         this.rectangle = new Rectangle(50,50);

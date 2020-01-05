@@ -11,6 +11,9 @@ import sample.maps.TypeOfTitle;
 
 import java.util.*;
 
+/**
+ * class responsible for the players and their behaviour
+ */
 public class Player {
 
 
@@ -54,6 +57,11 @@ public class Player {
         return hitbox;
     }
 
+    /**
+     * relocate player based on new coordinates and creates animation of moving
+     * @param dx x offset
+     * @param dy y offset
+     */
     public void move(double dx, double dy)
     {
         this.frame_counter+=0.08;
@@ -117,6 +125,10 @@ public class Player {
          }
     }
 
+    /**
+     * checks if the player interferes with the fields he cannot pass on
+     * @return true if player can move on title
+     */
     private boolean checkCollisions() {
         for(Title t:Game.getMap().getTitles())
         {
@@ -153,6 +165,12 @@ public class Player {
 
         return false;
     }
+
+    /**
+     * check if player is actually in fire field
+     * and sets a temporary immortality to save him from losing several points of life at once
+     * @return true if is in fire
+     */
     public boolean checkIfPlayerIsInFire()
     {
         for(Title t:Game.getMap().getTitles())
@@ -179,6 +197,7 @@ public class Player {
         }
         return false;
     }
+
 
 
     public void plantBomb(Map map)

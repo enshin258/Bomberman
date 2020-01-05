@@ -67,6 +67,7 @@ title __MAPS's Class Diagram__\n
 
   sample.maps.Map .up.|> sample.interfaces.Observable
   sample.maps.MapObserver .up.|> sample.interfaces.Observer
+  sample.maps.Title -up-|> javafx.scene.Node
   sample.maps.Title o-- sample.maps.TypeOfTitle : typeOfTitle
 
 

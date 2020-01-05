@@ -8,7 +8,13 @@ import sample.interfaces.Observer;
 
 import java.io.IOException;
 
+/**
+ * reacts on clicked button in main menu
+ */
 public class MenuObserver implements Observer {
+    /**
+     * execute action based on clicked button in main menu
+     */
     @Override
     public void update() {
         switch (Menu.getClickedButton())

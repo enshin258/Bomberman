@@ -9,8 +9,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 import java.util.Vector;
 
+/**
+ * class that helps loading class from xlsx file
+ */
 public class MapReader {
 
+    /**
+     * create map based on file
+     * @param pathToMapFile path to xlsx file
+     * @param mapGridPane link to gridpane
+     * @param titles vector of all titles in map @see {@link Map}
+     * @throws IOException
+     * @throws InvalidFormatException
+     */
     public static void readMapFromXLSXFile(String pathToMapFile, GridPane mapGridPane, Vector<Title> titles) throws IOException, InvalidFormatException {
 
         XSSFWorkbook workbook = new XSSFWorkbook(new File(pathToMapFile));

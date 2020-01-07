@@ -2,13 +2,23 @@ package sample.game;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import sample.main.Menu;
 import sample.maps.MapObserver;
 import sample.player.Direction;
@@ -359,14 +369,27 @@ public class Game implements Initializable  {
     public static void checkIfEndGame()
     {
 
+        int numberOfWinner=0;
         if(numberOfLivingPlayers==1)
         {
+            for (Player lastPLayer:players) {
+                if(lastPLayer!=null)
+                {
+                    numberOfWinner=lastPLayer.getCharacterID();
+                }
+            }
             System.out.println("Koniec gry!");
-            Menu.getActualStage().close();
-            System.exit(0);
+
+            Alert alert = new Alert(Alert.AlertType.NONE,"Game Over!");
+            alert.setTitle("Game Over");
+            alert.setContentText("Player number: " + numberOfWinner + " win !!!");
+            alert.getButtonTypes().add(ButtonType.FINISH);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.FINISH) {
+                Menu.getActualStage().close();
+                System.exit(0);
+            }
         }
-
-
     }
 
 
@@ -411,7 +434,7 @@ public class Game implements Initializable  {
                 }
                 catch (Exception e)
                 {
-
+                    e.printStackTrace();
                 }
 
 
